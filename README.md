@@ -1,32 +1,112 @@
-# React + TypeScript + Vite
+# 🛸 UMENRS (UAV Emergency Network Relay System) Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+[![Active Mission](https://img.shields.io/badge/Mission-Active-green.svg?style=flat-square)](#)
+[![TypeScript](https://img.shields.io/badge/Language-TypeScript-blue.svg?style=flat-square)](#)
+[![React](https://img.shields.io/badge/Framework-React--TS-cyan.svg?style=flat-square)](#)
+[![Vite](https://img.shields.io/badge/Build-Vite-purple.svg?style=flat-square)](#)
 
-Currently, two official plugins are available:
+A high-fidelity, responsive emergency command center dashboard for the **UAV Emergency Network Relay System (UMENRS)**. This system is designed to simulate tactical disaster monitoring, AI-driven survivor search coordinates, and mesh network relay deployments during communication outages.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+The user interface matches emergency software layout requirements used by professional disaster response groups like FEMA, NDMA, and search & rescue command operations.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 📸 Key Capabilities & Visual Modules
 
-## Expanding the Oxlint configuration
+### 🗺️ Interactive Disaster Map
+* Built with **React Leaflet** (OpenStreetMap) utilizing customized tactical dark-map filters.
+* Animated vector icon markers for active UAV positions (rotating dynamically to represent flight headings).
+* Pulsing red distress SOS beacons showing survivor locations.
+* Green hotspots identifying AI-classified survivors.
+* Multi-overlay configurations outlining regional disaster threats (Flood Zones, Wildfire Fronts, Mudslide Risks) alongside clear Helipads and Ground Relays.
+* Smooth fly-to panning animations when focusing on target coordinates.
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+### 📊 Real-Time Telemetry Gauges
+* Radial vector SVG progress indicators tracking airspeed, altitude levels, and communication signal strengths.
+* Rotating compass indicator matching live UAV headers.
+* Dynamic battery rings shifting from Green (healthy) to Amber/Red (low fuel limits) accompanied by alarm logs.
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+### 🚨 Live SOS Beacon Inbox
+* Severity-sorted distress call boards containing victim counts, injury status, description messages, and GPS coordinates.
+* Interactive command dispatching ("Acknowledge Beacons" and "Dispatch Ground Teams") reflecting on active map paths and timeline logs.
+
+### 📈 Recharts Visual Analytics
+* Area layouts displaying survivor scanning confidence trends.
+* Stacked bar graphs tracking SOS receipts vs resolved dispatches.
+* Composed line/bar charts correlating flight hours with battery draw metrics.
+* Line latency indicators comparing satellite links with ground mesh node terminals.
+
+### 📥 Manifest Export Center
+* Functional browser download triggers generating actual **CSV files** (for telemetry logs, survivor coordinates, and SOS lists) and **GeoJSON layers** suitable for GIS imports.
+* Interactive PDF printing setup presenting clean official manifests.
+
+---
+
+## 🛠️ Tech Stack & Dependencies
+
+* **Core**: React.js (Vite template), TypeScript
+* **Styling**: Tailwind CSS v4.0.0 (CSS-first configuration, zero config files)
+* **Animation**: Framer Motion (smooth card mounts and dropdown transitions)
+* **Maps**: Leaflet, React Leaflet (tactical tile styling)
+* **Visualizations**: Recharts, SVG path sparklines
+* **Iconography**: Lucide React
+
+---
+
+## 📂 Code Directory Layout
+
+```bash
+src/
+├── components/
+│   ├── analytics/
+│   │   └── AnalyticsPanel.tsx      # Recharts visualizations
+│   ├── dashboard/
+│   │   ├── DisasterMap.tsx         # Leaflet GIS layout & controls
+│   │   ├── KPICards.tsx            # Animated sparkline stats
+│   │   ├── TelemetryPanel.tsx      # SVG dials & airspeed gauges
+│   │   ├── SOSInboxPanel.tsx       # Alert management panels
+│   │   ├── SurvivorPanel.tsx       # Animated thermal radar feeds
+│   │   ├── HazardSummaryPanel.tsx  # Threat charts & weather summaries
+│   │   ├── SystemHealthPanel.tsx   # Ping limits & node status
+│   │   └── MissionTimeline.tsx     # Chronological log streams
+│   ├── layout/
+│   │   ├── Header.tsx              # Digital clocks & notification hubs
+│   │   └── Sidebar.tsx             # Collapsible/Responsive navigation
+│   ├── reports/
+│   │   └── ReportsPanel.tsx        # Print manifesting & CSV/GeoJSON exports
+│   └── settings/
+│       └── SettingsPanel.tsx       # Localizations & GIS map styling
+├── context/
+│   └── DashboardContext.tsx        # State triggers & drift simulators
+├── data/
+│   └── mockData.ts                 # Database structure models
+├── App.tsx                         # Core responsive switcher routing
+├── main.tsx                        # Global provider wrapping
+└── index.css                       # Glassmorphism helpers & custom classes
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+---
+
+## ⚙️ Quick Start Installation
+
+Ensure you have Node.js (v18+) installed.
+
+### 1. Install Dependencies
+```powershell
+npm install
+```
+
+### 2. Launch Local Dev Server
+```powershell
+npm run dev
+```
+Open **[http://localhost:5173/](http://localhost:5173/)** in your browser.
+
+### 3. Verify Code Compilation
+```powershell
+# Run TypeScript compilation checks
+npx tsc --noEmit
+
+# Compile production bundle
+npm run build
+```
